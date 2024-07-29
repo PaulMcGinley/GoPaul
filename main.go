@@ -1,10 +1,30 @@
 package main
 
-import (
-	"github.com/PaulMcGinley/GoPaul/console"
-	"strconv"
-)
+import "github.com/PaulMcGinley/GoPaul/console"
 
+var nums = []int{1, 2, 3, 4, 5}
+
+func main() {
+	console.PrintFormat(console.Italic, console.ForegroundRed, "Hello, World!", console.Reset, " ", console.ForegroundBlue, console.Bold, "This is bold blue text", console.Reset, console.NewLine)
+
+	console.PrintFormat(console.BackgroundCyan, "string", console.Reset, console.NewLine)
+	console.PrintFormat(console.BackgroundBlue, "string", console.Reset, console.NewLine)
+	console.PrintFormat(console.BackgroundRed, "string", console.Reset, console.NewLine)
+	console.PrintFormat(console.BackgroundMagenta, "string", console.Reset, console.NewLine)
+	console.PrintFormat(console.Reset, "Regular", console.Reset, console.NewLine)
+	console.PrintFormat(console.Bold, "Bold", console.Reset, console.NewLine)
+	console.PrintFormat(console.Dim, "Dim", console.Reset, console.NewLine)
+	console.PrintFormat(console.Italic, "Italic", console.Reset, console.NewLine)
+	console.PrintFormat(console.Underlined, "Underlined", console.Reset, console.NewLine)
+	console.PrintFormat(console.Blink, "Blink", console.Reset, console.NewLine)
+	console.PrintFormat(console.Reverse, "Reverse", console.Reset, console.NewLine)
+	console.PrintFormat(console.Hidden, "Hidden", console.Reset, console.NewLine)
+	console.PrintFormat(console.StrikeThrough, "StrikeThrough", console.Reset, console.NewLine)
+	console.PrintFormat(nums, console.NewLine)
+
+}
+
+/*
 func main() {
 
 	for {
@@ -102,3 +122,4 @@ func main() {
 		}
 	}
 }
+*/

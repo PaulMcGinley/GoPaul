@@ -1,25 +1,103 @@
+// Package console does this
 package console
 
 import "fmt"
 
+type Format int
+
+const (
+	Reset Format = iota
+	Bold
+	Dim
+	Italic
+	Underlined
+	Blink
+	Reverse       = 7
+	Hidden        = 8
+	StrikeThrough = 9
+
+	EndBold = 22
+	EndDim
+	EndItalic
+	EndUnderlined
+	EndBlink
+	EndReverse
+	EndHidden
+	EndStrikeThrough = 29
+) // https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters
+
+type Colour int
+
+const (
+	ForegroundBlack Colour = iota + 30
+	ForegroundRed
+	ForegroundGreen
+	ForegroundYellow
+	ForegroundBlue
+	ForegroundMagenta
+	ForegroundCyan
+	ForegroundWhite
+)
+
+type BackgroundColour int
+
+const (
+	BackgroundBlack BackgroundColour = iota
+	BackgroundRed
+	BackgroundGreen
+	BackgroundYellow
+	BackgroundBlue
+	BackgroundMagenta
+	BackgroundCyan
+	BackgroundWhite
+)
+
+const NewLine = "\n"
+
+func PrintFormat(params ...any) {
+	var output string
+
+	for _, param := range params {
+		switch param.(type) {
+		case Format:
+			output += fmt.Sprintf("\033[%dm", param)
+		case Colour:
+			output += fmt.Sprintf("\033[%dm", param)
+		case BackgroundColour:
+			output += fmt.Sprintf("\033[48;5;%dm", param)
+		case string:
+			output += param.(string)
+		default:
+			output += fmt.Sprintf("%v", param)
+		}
+	}
+
+	fmt.Print(output)
+}
+
+// Clear empties the console of all text
 func Clear() {
 	fmt.Print("\033[H\033[2J")
 }
 
-func WriteLine(message string) {
+// WriteLine writes a line of text to the console with a newline character at the end
+func WriteLine(message ...string) {
 	fmt.Println(message)
 }
 
+// Write appends text to the console
 func Write(message string) {
 	fmt.Print(message)
 }
 
+// ReadLine reads a line of text from the console
 func ReadLine() string {
 	var value string
 	fmt.Scanln(&value)
 	return value
 }
 
+// Read reads a line of text from the console
 func Read() string {
 	var value string
 	fmt.Scan(&value)
