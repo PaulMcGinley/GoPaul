@@ -1,3 +1,3 @@
-module github.com/PaulFMcGinley/GoPaul
+module github.com/PaulMcGinley/GoPaul
 
 go 1.22
