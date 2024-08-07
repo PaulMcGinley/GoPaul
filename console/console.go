@@ -1,4 +1,4 @@
-// Package console does this
+// Package console provides functions to interact with the console with knowing ANSI escape codes.
 package console
 
 import "fmt"
@@ -11,19 +11,11 @@ const (
 	Dim
 	Italic
 	Underlined
-	Blink
-	Reverse       = 7
-	Hidden        = 8
-	StrikeThrough = 9
 
-	EndBold = 22
-	EndDim
-	EndItalic
-	EndUnderlined
-	EndBlink
-	EndReverse
-	EndHidden
-	EndStrikeThrough = 29
+	EndBold       = 21
+	EndDim        = 22
+	EndItalic     = 23
+	EndUnderlined = 24
 ) // https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters
 
 type Colour int
@@ -41,8 +33,10 @@ const (
 
 type BackgroundColour int
 
+type CustomFormat int
+
 const (
-	BackgroundBlack BackgroundColour = iota
+	BackgroundBlack BackgroundColour = iota + 40
 	BackgroundRed
 	BackgroundGreen
 	BackgroundYellow
@@ -64,7 +58,10 @@ func PrintFormat(params ...any) {
 		case Colour:
 			output += fmt.Sprintf("\033[%dm", param)
 		case BackgroundColour:
-			output += fmt.Sprintf("\033[48;5;%dm", param)
+			//output += fmt.Sprintf("\033[48;5;%dm", param)
+			output += fmt.Sprintf("\033[%dm", param)
+		case CustomFormat:
+			output += fmt.Sprintf("\033[%dm", param)
 		case string:
 			output += param.(string)
 		default:

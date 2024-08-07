@@ -1,8 +1,12 @@
 package main
 
-import "github.com/PaulMcGinley/GoPaul/console"
+import (
+	"github.com/PaulMcGinley/GoPaul/array"
+	"github.com/PaulMcGinley/GoPaul/console"
+)
 
 var nums = []int{1, 2, 3, 4, 5}
+var strings = []string{"Hello", "World", "This", "Is", "A", "Test"}
 
 func main() {
 	console.PrintFormat(console.Italic, console.ForegroundRed, "Hello, World!", console.Reset, " ", console.ForegroundBlue, console.Bold, "This is bold blue text", console.Reset, console.NewLine)
@@ -16,11 +20,18 @@ func main() {
 	console.PrintFormat(console.Dim, "Dim", console.Reset, console.NewLine)
 	console.PrintFormat(console.Italic, "Italic", console.Reset, console.NewLine)
 	console.PrintFormat(console.Underlined, "Underlined", console.Reset, console.NewLine)
-	console.PrintFormat(console.Blink, "Blink", console.Reset, console.NewLine)
-	console.PrintFormat(console.Reverse, "Reverse", console.Reset, console.NewLine)
-	console.PrintFormat(console.Hidden, "Hidden", console.Reset, console.NewLine)
-	console.PrintFormat(console.StrikeThrough, "StrikeThrough", console.Reset, console.NewLine)
 	console.PrintFormat(nums, console.NewLine)
+	console.PrintFormat(console.CustomFormat(47), "Hello, World!", console.Reset, console.NewLine)
+	nums = array.DeleteElement(nums, 2)
+	console.PrintFormat(nums, console.NewLine)
+	console.PrintFormat(strings, console.NewLine)
+	original_strings := array.Copy(strings)
+	strings = array.DeleteElement(strings, 2)
+	console.PrintFormat(strings, console.NewLine)
+	console.PrintFormat(original_strings, console.NewLine)
+
+	appArr := array.Append(strings, original_strings...)
+	console.PrintFormat(appArr, console.NewLine)
 
 }
 
