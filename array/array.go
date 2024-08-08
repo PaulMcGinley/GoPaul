@@ -108,3 +108,16 @@ func GetElementIndex[T comparable](arr []T, element T) int {
 	}
 	return -1 // return -1 if the element is not found
 }
+
+// Distinct returns a slice with duplicate elements removed
+func Distinct[T comparable](arr []T) []T {
+	distinct := make([]T, 0, len(arr))
+	seen := make(map[T]struct{})
+	for _, v := range arr {
+		if _, ok := seen[v]; !ok {
+			seen[v] = struct{}{}
+			distinct = append(distinct, v)
+		}
+	}
+	return distinct
+}

@@ -80,3 +80,13 @@ func (r Rectangle) Contains(p types.Point) bool {
 func (r Rectangle) Containsf(p types.Pointf) bool {
 	return p.X >= 0 && p.X <= r.Width && p.Y >= 0 && p.Y <= r.Height
 }
+
+// Center returns the center of a rectangle.
+func (r Rectangle) Center() types.Pointf {
+	return types.Pointf{r.Width / 2, r.Height / 2}
+}
+
+// IsSquare returns true if a rectangle is a square.
+func (r Rectangle) IsSquare(v float64) bool {
+	return r.Width == r.Height
+}
