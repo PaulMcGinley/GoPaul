@@ -9,7 +9,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestEQueue_Enqueue(t *testing.T) {
+func TestQueue_Enqueue(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -19,7 +19,7 @@ func TestEQueue_Enqueue(t *testing.T) {
 	}
 }
 
-func TestEQueue_Dequeue(t *testing.T) {
+func TestQueue_Dequeue(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -36,7 +36,7 @@ func TestEQueue_Dequeue(t *testing.T) {
 	}
 }
 
-func TestEQueue_Pop(t *testing.T) {
+func TestQueue_Pop(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -53,7 +53,7 @@ func TestEQueue_Pop(t *testing.T) {
 	}
 }
 
-func TestEQueue_PopEmpty(t *testing.T) {
+func TestQueue_PopEmpty(t *testing.T) {
 	q := New()
 	_, err := q.Pop()
 	if err == nil {
@@ -61,7 +61,7 @@ func TestEQueue_PopEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_Push(t *testing.T) {
+func TestQueue_Push(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -73,7 +73,7 @@ func TestEQueue_Push(t *testing.T) {
 	}
 }
 
-func TestEQueue_PushEmpty(t *testing.T) {
+func TestQueue_PushEmpty(t *testing.T) {
 	q := New()
 	q.Push(1)
 	want := 1
@@ -83,7 +83,7 @@ func TestEQueue_PushEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_Peek(t *testing.T) {
+func TestQueue_Peek(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -100,7 +100,7 @@ func TestEQueue_Peek(t *testing.T) {
 	}
 }
 
-func TestEQueue_IsEmpty(t *testing.T) {
+func TestQueue_IsEmpty(t *testing.T) {
 	q := New()
 	if !q.IsEmpty() {
 		t.Errorf("queue: Expected empty queue")
@@ -111,7 +111,7 @@ func TestEQueue_IsEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_Size(t *testing.T) {
+func TestQueue_Size(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -121,7 +121,7 @@ func TestEQueue_Size(t *testing.T) {
 	}
 }
 
-func TestEQueue_Clear(t *testing.T) {
+func TestQueue_Clear(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -132,7 +132,7 @@ func TestEQueue_Clear(t *testing.T) {
 	}
 }
 
-func TestEQueue_Values(t *testing.T) {
+func TestQueue_Values(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -143,7 +143,7 @@ func TestEQueue_Values(t *testing.T) {
 	}
 }
 
-func TestEQueue_Contains(t *testing.T) {
+func TestQueue_Contains(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -156,7 +156,7 @@ func TestEQueue_Contains(t *testing.T) {
 	}
 }
 
-func TestEQueue_DequeueEmpty(t *testing.T) {
+func TestQueue_DequeueEmpty(t *testing.T) {
 	q := New()
 	_, err := q.Dequeue()
 	if err == nil {
@@ -164,7 +164,7 @@ func TestEQueue_DequeueEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_PeekEmpty(t *testing.T) {
+func TestQueue_PeekEmpty(t *testing.T) {
 	q := New()
 	_, err := q.Peek()
 	if err == nil {
@@ -172,14 +172,14 @@ func TestEQueue_PeekEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_ContainsEmpty(t *testing.T) {
+func TestQueue_ContainsEmpty(t *testing.T) {
 	q := New()
 	if q.Contains(1) {
 		t.Errorf("Expected false")
 	}
 }
 
-func TestEQueue_ValuesEmpty(t *testing.T) {
+func TestQueue_ValuesEmpty(t *testing.T) {
 	q := New()
 	values := q.Values()
 	if len(values) != 0 {
@@ -187,7 +187,7 @@ func TestEQueue_ValuesEmpty(t *testing.T) {
 	}
 }
 
-func TestEQueue_Remove(t *testing.T) {
+func TestQueue_Remove(t *testing.T) {
 	q := New()
 	q.Enqueue(1)
 	q.Enqueue(2)
