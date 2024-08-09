@@ -1,3 +1,8 @@
+// Created by Paul F. McGinley Aug 8, 2024
+
+// Package queue provides a object queue implementation.
+// Unlike a fixed-size array implementation, this queue implementation is dynamic and can grow as needed.
+// The Queue type can be used as a fifo queue, lifo queue, or priority queue.
 package queue
 
 import (
@@ -15,36 +20,12 @@ func New() *Queue {
 	return &Queue{}
 }
 
-// Enqueue adds an element to the end of the queue
-func (q *Queue) Enqueue(element interface{}) {
+// Length returns the number of elements in the queue
+func (q *Queue) Length() int {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	q.elements = append(q.elements, element)
-}
-
-// Dequeue removes an element from the front of the queue
-func (q *Queue) Dequeue() (interface{}, error) {
-	q.lock.Lock()
-	defer q.lock.Unlock()
-
-	if len(q.elements) == 0 {
-		return nil, fmt.Errorf("queue is empty")
-	}
-	element := q.elements[0]
-	q.elements = q.elements[1:]
-	return element, nil
-}
-
-// Peek returns the element at the front of the queue
-func (q *Queue) Peek() (interface{}, error) {
-	q.lock.Lock()
-	defer q.lock.Unlock()
-
-	if len(q.elements) == 0 {
-		return nil, fmt.Errorf("queue is empty")
-	}
-	return q.elements[0], nil
+	return len(q.elements)
 }
 
 // IsEmpty returns true if the queue is empty
@@ -53,14 +34,6 @@ func (q *Queue) IsEmpty() bool {
 	defer q.lock.Unlock()
 
 	return len(q.elements) == 0
-}
-
-// Size returns the number of elements in the queue
-func (q *Queue) Size() int {
-	q.lock.Lock()
-	defer q.lock.Unlock()
-
-	return len(q.elements)
 }
 
 // Clear removes all elements from the queue
@@ -106,23 +79,43 @@ func (q *Queue) Remove(elements ...interface{}) {
 	}
 }
 
-// Pop removes and returns the last element from the queue
-func (q *Queue) Pop() (interface{}, error) {
+// RemoveMultiple removes multiple elements from a queue
+func (q *Queue) RemoveMultiple(elements ...interface{}) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	if len(q.elements) == 0 {
-		return nil, fmt.Errorf("queue is empty")
+	for _, element := range elements {
+		for i := 0; i < len(q.elements); i++ {
+			if q.elements[i] == element {
+				q.elements = append(q.elements[:i], q.elements[i+1:]...)
+				i--
+			}
+		}
 	}
-	element := q.elements[len(q.elements)-1]
-	q.elements = q.elements[:len(q.elements)-1]
-	return element, nil
 }
 
-// Push adds an element to the front of the queue
-func (q *Queue) Push(element interface{}) {
+// Swap swaps two elements in the queue
+func (q *Queue) Swap(a, b int) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	q.elements = append([]interface{}{element}, q.elements...)
+	if a < 0 || a >= len(q.elements) {
+		return fmt.Errorf("index i (%d) out of range", a)
+	}
+	if b < 0 || b >= len(q.elements) {
+		return fmt.Errorf("index j (%d) out of range", b)
+	}
+
+	q.elements[a], q.elements[b] = q.elements[b], q.elements[a]
+	return nil
+}
+
+// Reverse reverses the order of elements in the queue
+func (q *Queue) Reverse() {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	for a, b := 0, len(q.elements)-1; a < b; a, b = a+1, b-1 {
+		q.elements[a], q.elements[b] = q.elements[b], q.elements[a]
+	}
 }

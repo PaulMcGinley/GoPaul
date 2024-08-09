@@ -65,6 +65,37 @@ func (p Point) String() string {
 	return fmt.Sprintf("(%d, %d)", p.X, p.Y)
 }
 
+// Parse returns a point from a string.
+func (p Point) Parse(s string) (Point, error) {
+	var x, y int
+	_, err := fmt.Sscanf(s, "(%d, %d)", &x, &y)
+	if err != nil {
+		return Point{}, err
+	}
+	return Point{x, y}, nil
+}
+
+func (p Point) TryParse(s string) (Point, bool) {
+	var x, y int
+	format := "(%d,%d)"
+	// Todo: remove spaces
+	_, err := fmt.Sscanf(s, format, &x, &y)
+	if err != nil {
+		return Point{}, false
+	}
+	return Point{x, y}, true
+}
+
+// ManhattanDistance returns the Manhattan distance between two points.
+func (p Point) ManhattanDistance(q Point) int {
+	return int(math.Abs(float64(p.X-q.X)) + math.Abs(float64(p.Y-q.Y)))
+}
+
+// EuclideanDistance returns the Euclidean distance between two points.
+func (p Point) EuclideanDistance(q Point) float64 {
+	return math.Sqrt(float64((p.X-q.X)*(p.X-q.X) + (p.Y-q.Y)*(p.Y-q.Y)))
+}
+
 // Distance returns the distance between two points.
 func (p Point) Distance(q Point) float64 {
 	dx := q.X - p.X

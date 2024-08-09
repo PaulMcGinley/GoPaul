@@ -17,7 +17,7 @@ func (a Arc) Chord() float64 {
 	return 2 * a.Circle.Radius * math.Sin(a.Angle*math.Pi/360)
 }
 
-// ArcLength returns the length of the arc
-func (a Arc) ArcLength() float64 {
+// Length returns the length of the arc
+func (a Arc) Length() float64 {
 	return a.Circle.Radius * a.Angle * math.Pi / 180
 }

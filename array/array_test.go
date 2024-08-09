@@ -193,3 +193,28 @@ func TestGetElementIndexNotFound(t *testing.T) {
 		t.Errorf("Expected -1, got %d", index)
 	}
 }
+
+func TestDistinct(t *testing.T) {
+	arr := []int{1, 2, 3, 2, 1}
+	result := Distinct(arr)
+	if len(result) != 3 {
+		t.Errorf("Expected length of 3, got %d", len(result))
+	}
+	if result[0] != 1 {
+		t.Errorf("Expected 1, got %d", result[0])
+	}
+	if result[1] != 2 {
+		t.Errorf("Expected 2, got %d", result[1])
+	}
+	if result[2] != 3 {
+		t.Errorf("Expected 3, got %d", result[2])
+	}
+}
+
+func TestDistinctEmpty(t *testing.T) {
+	arr := []int{}
+	result := Distinct(arr)
+	if len(result) != 0 {
+		t.Errorf("Expected length of 0, got %d", len(result))
+	}
+}

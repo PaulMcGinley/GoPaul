@@ -117,3 +117,16 @@ func TestPoint_Split(t *testing.T) {
 		t.Errorf("Split() = (%v, %v), want (%v, %v)", gotX, gotY, wantX, wantY)
 	}
 }
+
+func TestPoint_Parse(t *testing.T) {
+	p := Point{}
+	s := "(1, 1)"
+	got, err := p.Parse(s)
+	want := Point{X: 1, Y: 1}
+	if err != nil {
+		t.Errorf("Parse() error = %v, want nil", err)
+	}
+	if got != want {
+		t.Errorf("Parse() = %v, want %v", got, want)
+	}
+}
